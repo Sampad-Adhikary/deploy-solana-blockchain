@@ -1,0 +1,85 @@
+{
+    "title": "Deploy and test Private Solana Blockchain network and do a transaction.",
+    "steps": [
+        {
+            "step": "1",
+            "task": "Let's create a private Solana Blockchain network using Docker Compose."
+        },
+        {
+            "step": "2",
+            "task": "First step is to create a docker-compose.yml file(already created for your convenience) which will store the configuration which defines the requirements of our network."
+        },
+        {
+            "step": "3",
+            "task": "In the same directory as docker-compose.yml create a config directory(already created for your convenience). This directory will store the configuration files for your Solana node."
+        },
+        {
+            "step": "4",
+            "task": "In the following steps we will install Solana CLI which will help us to interact with our Solana Blockchain network. Open Command Prompt (com.exe) as administrator."
+        },
+        {
+            "content": "cmd /c \"curl https://release.solana.com/v1.16.5/solana-install-init-x86_64-pc-windows-msvc.exe --output C:\\solana-install-tmp\\solana-install-init.exe --create-dirs\"",
+            "step": "4",
+            "task": "Run this command in your command prompt. If you see a security pop-up by your system, please select to allow the program to run."
+        },
+        {
+            "content": "\"C:/solana-install-tmp\\solana-install-init.exe\" v1.16.5",
+            "step": "5",
+            "task": "When the installer is finished, press enter and close the terminal."
+        },
+        {
+            "content": "solana --version",
+            "step": "6",
+            "task": "Now restart the command prompt, now not in administrator mode and run this command to verify the installation is done successfully."
+        },
+        {
+            "content": "solana-keygen new -o config/id.json",
+            "step": "7",
+            "task": "Now you can set a new keypair by running the following command in the config directory, which is in the same directory as docker-compose.yml file. Once the keypair is created carefully store the public key it produces."
+        },
+        {
+            "content": "docker-compose up -d",
+            "step": "8",
+            "task": "Now we will run start the Solana network using this command."
+        },
+        {
+            "content": "docker ps",
+            "step": "9",
+            "task": "Now run this command to check if the necessary containers have been created and started."
+        },
+        {
+            "content": "docker logs -f solana-validator",
+            "step": "10",
+            "task": "Now run this command to check the logs of the Solana Validator node."
+        },
+        {
+            "content": "solana cluster-version /n solana config get",
+            "step": "11",
+            "task": "Now run this command to check the version of the Solana cluster and the configuration of the Solana node. This will help you to verify that you are connected to the correct network."
+        },
+        {
+            "content": "npm init -y /n npm install @solana/web3.js",
+            "step": "12",
+            "task": "In this module we are going to use Node js to write the code for interacting with our Private Solana Network. So run this command to initialize node and install the necessary libraries."
+        },
+        {
+            "step":"13",
+            "task":"Paste the content of the id.json file in config directory into keypair.json file as indicated int the file."
+        },
+        {
+            "content": "node solana-interaction.js",
+            "step": "14",
+            "task": "Now go through the code in solana-interaction.js file. This is the code written in javascript and is going to be compiled by using Node.js. This code logs the number of blocks currently connected to the network. This number should keep on increasing if we re-run this command."
+        },
+        {
+            "content": "node solana-transaction.js",
+            "step": "15",
+            "task": "Now go through the code in solana-transaction.js file.The provided code is a Node.js script that interacts with a private Solana blockchain network. It defines functions to create a new token account and a custom token (mint) using the @solana/web3.js library. The script then mints a specified number of tokens to the newly created token account and transfers a specified number of tokens from a sender's account to a destination account. The main function reads private keys from a keypair.json file, creates the required keypairs, and executes the token minting and transfer functions. However, it seems to encounter an error during the token minting and transfer processes, possibly due to incorrect private keys or configuration. To resolve this, ensure that the private keys and network configuration are correct and accessible."
+        },
+        {
+            "content":"docker-compose down",
+            "step":"16",
+            "task":"With this we have successfully created our private solana blockchain network and have done a transaction on it as well. Now we can down the network using this command to delete the containers."
+        }
+    ]
+}

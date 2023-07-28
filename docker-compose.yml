@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  solana-validator:
+    image: solanalabs/solana:v1.14.21
+    container_name: solana-validator
+    command: ["solana-test-validator", "--enable-rpc-exit", "--log", "solana.log"]
+    ports:
+      - "8899:8899"
+      - "8900:8900" 
+      - "8901:8900/udp"
+    volumes:
+      - ./config:/root/.config/solana
+    networks:
+      - solana-net
+networks:
+  solana-net:
+    driver: bridge

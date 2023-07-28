@@ -1,0 +1,17 @@
+{
+  "name": "solana",
+  "version": "1.0.0",
+  "description": "",
+  "main": "solana-interaction.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/spl-token": "^0.3.8",
+    "@solana/web3.js": "^1.78.0",
+    "ws": "^8.13.0"
+  }
+}
